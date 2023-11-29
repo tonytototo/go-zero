@@ -1,4 +1,4 @@
-module github.com/zeromicro/m-go-zero
+module github.com/tonytoto/m-go-zero
 
 go 1.19
 
