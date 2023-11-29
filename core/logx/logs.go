@@ -17,9 +17,10 @@ import (
 const callerDepth = 4
 
 var (
-	timeFormat = "2006-01-02T15:04:05.000Z07:00"
-	logLevel   uint32
-	encoding   uint32 = jsonEncodingType
+	timeFormat  = "2006-01-02T15:04:05.000Z07:00"
+	serviceName = ""
+	logLevel    uint32
+	encoding    uint32 = jsonEncodingType
 	// maxContentLength is used to truncate the log content, 0 for not truncating.
 	maxContentLength uint32
 	// use uint32 for atomic operations
@@ -271,6 +272,10 @@ func SetUp(c LogConf) (err error) {
 
 		if len(c.TimeFormat) > 0 {
 			timeFormat = c.TimeFormat
+		}
+
+		if len(c.ServiceName) > 0 {
+			serviceName = c.ServiceName
 		}
 
 		atomic.StoreUint32(&maxContentLength, c.MaxContentLength)

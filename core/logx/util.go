@@ -20,6 +20,10 @@ func getTimestamp() string {
 	return time.Now().Format(timeFormat)
 }
 
+func getServiceName() string {
+	return serviceName
+}
+
 func prettyCaller(file string, line int) string {
 	idx := strings.LastIndexByte(file, '/')
 	if idx < 0 {

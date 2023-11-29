@@ -298,6 +298,7 @@ func output(writer io.Writer, level string, val any, fields ...LogField) {
 		for _, field := range fields {
 			entry[field.Key] = field.Value
 		}
+		entry[serviceNameKey] = getServiceName()
 		entry[timestampKey] = getTimestamp()
 		entry[levelKey] = level
 		entry[contentKey] = val
@@ -360,6 +361,8 @@ func writePlainAny(writer io.Writer, level string, val any, fields ...string) {
 
 func writePlainText(writer io.Writer, level, msg string, fields ...string) {
 	var buf bytes.Buffer
+	buf.WriteString(getServiceName())
+	buf.WriteByte(plainEncodingSep)
 	buf.WriteString(getTimestamp())
 	buf.WriteByte(plainEncodingSep)
 	buf.WriteString(level)
@@ -382,6 +385,8 @@ func writePlainText(writer io.Writer, level, msg string, fields ...string) {
 
 func writePlainValue(writer io.Writer, level string, val any, fields ...string) {
 	var buf bytes.Buffer
+	buf.WriteString(getServiceName())
+	buf.WriteByte(plainEncodingSep)
 	buf.WriteString(getTimestamp())
 	buf.WriteByte(plainEncodingSep)
 	buf.WriteString(level)
